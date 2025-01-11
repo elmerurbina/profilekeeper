@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProfileKeeper</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Profile Keeper</h1>
+    <div id="app"></div>
+  </div>
+
+  <!-- React and ReactDOM CDN -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+  <!-- Babel CDN for JSX transpiling -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- React Code with JSX -->
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    function ProfileKeeper() {
+      // Load profiles from localStorage or initialize with an empty array
+      const [profiles, setProfiles] = useState(() => {
+        const savedProfiles = localStorage.getItem('profiles');
+        return savedProfiles ? JSON.parse(savedProfiles) : [];
+      });
+
+      const [newProfile, setNewProfile] = useState({
+        name: '',
+        icon: '',
+        url: '',
+        description: '',
+      });
+
+      // Save profiles to localStorage whenever they change
+      useEffect(() => {
+        localStorage.setItem('profiles', JSON.stringify(profiles));
+      }, [profiles]);
+
+      function handleInputChange(e) {
+        const { name, value } = e.target;
+        setNewProfile({ ...newProfile, [name]: value });
+      }
+
+      function addProfile(e) {
+        e.preventDefault();
+        if (!newProfile.name || !newProfile.url) {
+          alert('Name and URL are required!');
+          return;
+        }
+        setProfiles([...profiles, newProfile]);
+        setNewProfile({ name: '', icon: '', url: '', description: '' });
+      }
+
+      function deleteProfile(indexToDelete) {
+        const updatedProfiles = profiles.filter((_, index) => index !== indexToDelete);
+        setProfiles(updatedProfiles);
+      }
+
+      return (
+        <div>
+          <div className="add-profile-form">
+            <input
+              type="text"
+              name="name"
+              placeholder="Platform Name"
+              value={newProfile.name}
+              onChange={handleInputChange}
+            />
+            <input
+              type="text"
+              name="icon"
+              placeholder="Icon URL"
+              value={newProfile.icon}
+              onChange={handleInputChange}
+            />
+            <input
+              type="text"
+              name="url"
+              placeholder="Profile URL"
+              value={newProfile.url}
+              onChange={handleInputChange}
+            />
+            <input
+              type="text"
+              name="description"
+              placeholder="Brief Description"
+              value={newProfile.description}
+              onChange={handleInputChange}
+            />
+            <button onClick={addProfile}>Add Profile</button>
+          </div>
+          <div>
+            {profiles.length === 0 ? (
+              <p>No profiles added yet. Start by adding your first profile!</p>
+            ) : (
+              profiles.map((profile, index) => (
+                <div key={index} className="profile-card">
+                  <div className="profile-info">
+                    <img src={profile.icon} alt={`${profile.name} icon`} />
+                    <div>
+                      <strong>{profile.name}</strong>
+                      <p>{profile.description}</p>
+                    </div>
+                  </div>
+                  <a href={profile.url} className="profile-url" target="_blank" rel="noopener noreferrer">
+                    Visit
+                  </a>
+                  <button onClick={() => deleteProfile(index)}>Delete</button>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<ProfileKeeper />, document.getElementById('app'));
+  </script>
+</body>
+</html>
