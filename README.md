@@ -12,11 +12,13 @@ ProfileKeeper is a web application built using React.js that allows users to man
 
 3. **Persistence**:  
    All the data entered is stored in the browser's local storage, ensuring that even if the page is refreshed or reopened, the profiles will still be available.
+4. **Export your content**: You can click the export to PDF button to download sharable a PDF version of your profiles
 
 ## Access the Page
 
 You can access the ProfileKeeper web application at the following URL:  
 [https://elmerurbina.github.io/profilekeeper](https://elmerurbina.github.io/profilekeeper)
+
 
 ## License
 
