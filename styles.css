@@ -64,3 +64,71 @@ h1 {
 .add-profile-form button:focus {
   outline: none;
 }
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+h1 {
+  flex-grow: 1;
+  font-size: 24px;
+  margin: 0;
+  text-align: left;
+}
+
+.export-pdf-btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: auto;
+  transition: background-color 0.3s ease;
+}
+
+.export-pdf-btn:hover {
+  background-color: #0056b3;
+}
+
+    .logo {
+      height: 50px;
+    }
+
+    .export-pdf-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .export-pdf-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .delete-btn {
+      background-color: #ff4d4f;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .delete-btn:hover {
+      background-color: #d9363e;
+    }
